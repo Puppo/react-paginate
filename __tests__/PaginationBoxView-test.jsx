@@ -6,9 +6,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-jest.dontMock('./../react_components/PaginationBoxView');
-jest.dontMock('./../react_components/PageView');
-jest.dontMock('./../react_components/BreakView');
 
 import PaginationBoxView from '../react_components/PaginationBoxView';
 
@@ -107,7 +104,7 @@ describe('Page count is zero', () => {
 
 describe('Page count checks', () => {
   it('should trigger a warning when a float is provided', async () => {
-    const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation();
     render(
       <PaginationBoxView
         pageCount={2.5}
@@ -129,7 +126,7 @@ describe('Page count checks', () => {
   });
 
   it('should trigger a warning when the initialPage provided is greater than the maximum page index (from pageCount)', () => {
-    const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation();
     render(<PaginationBoxView pageCount={10} initialPage={10} />);
     expect(console.warn).toHaveBeenCalledTimes(1);
     expect(console.warn).toHaveBeenLastCalledWith(
@@ -139,7 +136,7 @@ describe('Page count checks', () => {
   });
 
   it('should trigger a warning when the forcePage provided is greater than the maximum page index (from pageCount)', () => {
-    const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation();
     render(<PaginationBoxView pageCount={9} forcePage={9} />);
     expect(console.warn).toHaveBeenCalledTimes(1);
     expect(console.warn).toHaveBeenLastCalledWith(
@@ -716,7 +713,7 @@ describe('Test pagination behaviour', () => {
   });
 
   it('test ariaLabelBuilder works with extraAriaContext', async function () {
-    const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation();
     render(
       <PaginationBoxView
         initialPage={1}
@@ -902,7 +899,7 @@ describe('Test default props', () => {
 
   describe('default disableInitialCallback', () => {
     it('should call the onPageChange callback when disableInitialCallback is set to false/undefined', () => {
-      const myOnPageChangeMethod = jest.fn();
+      const myOnPageChangeMethod = vi.fn();
       render(
         <PaginationBoxView
           pageCount={DEFAULT_PAGE_COUNT}
@@ -1208,7 +1205,7 @@ describe('Test custom props', () => {
 
   describe('onPageChange', () => {
     it('should use the onPageChange prop when defined', async () => {
-      const myOnPageChangeMethod = jest.fn();
+      const myOnPageChangeMethod = vi.fn();
       render(
         <PaginationBoxView
           pageCount={DEFAULT_PAGE_COUNT}
@@ -1227,8 +1224,8 @@ describe('Test custom props', () => {
 
   describe('onPageActive', () => {
     it('should use the onPageActive prop when defined', async () => {
-      const myOnPageActiveMethod = jest.fn();
-      const myOnPageChangeMethod = jest.fn();
+      const myOnPageActiveMethod = vi.fn();
+      const myOnPageChangeMethod = vi.fn();
       render(
         <PaginationBoxView
           pageCount={DEFAULT_PAGE_COUNT}
@@ -1312,7 +1309,7 @@ describe('Test custom props', () => {
     });
 
     it('should report a warning when using both initialPage and forcePage props', async () => {
-      const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation();
       render(
         <PaginationBoxView
           pageCount={DEFAULT_PAGE_COUNT}
@@ -1384,7 +1381,7 @@ describe('Test custom props', () => {
 
   describe('disableInitialCallback', () => {
     it('should not call the onPageChange callback when disableInitialCallback is set to true', () => {
-      const myOnPageChangeMethod = jest.fn();
+      const myOnPageChangeMethod = vi.fn();
       render(
         <PaginationBoxView
           pageCount={DEFAULT_PAGE_COUNT}
@@ -1938,7 +1935,7 @@ describe('Test custom props', () => {
 
   describe('extraAriaContext', () => {
     it('should use the extraAriaContext prop when defined', async () => {
-      const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation();
       render(
         <PaginationBoxView
           pageCount={DEFAULT_PAGE_COUNT}
@@ -2422,7 +2419,7 @@ describe('Test custom props', () => {
 
   describe('onClick', () => {
     it('should use the onClick prop when defined', async () => {
-      const myOnClick = jest.fn(() => false);
+      const myOnClick = vi.fn(() => false);
       render(
         <PaginationBoxView
           onClick={myOnClick}
