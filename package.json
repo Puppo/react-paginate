@@ -28,6 +28,7 @@
     "url": "https://github.com/AdeleD/react-paginate/issues"
   },
   "dependencies": {
+    "jquery": "^4.0.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
@@ -52,6 +53,7 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "build": "vite build",
+    "demo:build": "vite build --config demo/vite.config.js",
     "demo": "vite --config demo/vite.config.js",
     "format": "prettier --write .",
     "lint": "eslint .",

@@ -6,31 +6,14 @@ const util = require('util');
 const express = require('express');
 const serveStatic = require('serve-static');
 
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const WebpackConfig = require('./webpack.config');
-
 const app = (module.exports.app = exports.app = express());
 
 const ROOT_DIR = path.join(__dirname, '.');
-const STYLES_DIR = path.join(__dirname, 'styles');
 const DATA = path.join(__dirname, 'data', 'data.json');
 const NODE_PORT = process.env.NODE_PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.use(serveStatic(ROOT_DIR));
-app.use(serveStatic(STYLES_DIR));
-
-const compiler = webpack(WebpackConfig);
-app.use(
-  webpackDevMiddleware(compiler, {
-    publicPath: '/build/',
-    stats: {
-      colors: true,
-    },
-  })
-);
-app.use(require('webpack-hot-middleware')(compiler));
 
 const ITEMS = JSON.parse(fs.readFileSync(DATA));
 
