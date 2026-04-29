@@ -35,19 +35,19 @@
     "react": "^16 || ^17 || ^18 || ^19"
   },
   "devDependencies": {
-    "@testing-library/react": "^13",
-    "@vitejs/plugin-react": "^4",
+    "@testing-library/react": "^16",
+    "@vitejs/plugin-react": "^6",
     "core-js": "^3",
     "eslint": "^7",
     "eslint-plugin-react": "^7",
-    "husky": "^8",
-    "jsdom": "^24",
-    "prettier": "^2.7",
-    "react": "^18",
-    "react-dom": "^18",
-    "styled-components": "^5",
-    "vite": "^5",
-    "vitest": "^1"
+    "husky": "^9",
+    "jsdom": "^29",
+    "prettier": "^3.8",
+    "react": "^19",
+    "react-dom": "^19",
+    "styled-components": "^6",
+    "vite": "^8",
+    "vitest": "^4"
   },
   "scripts": {
     "test": "vitest",
