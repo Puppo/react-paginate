@@ -1,9 +1,11 @@
 import react from '@vitejs/plugin-react';
-import fs from 'fs';
 import path from 'path';
 import { defineConfig } from 'vite';
 
-const DATA = path.join(__dirname, 'data', 'data.json');
+const ITEMS = Array.from({ length: 200 }, (_, i) => ({
+  username: `user-${i}`,
+  comment: `This is the comment #${i}`,
+}));
 
 function getPaginatedItems(items, offset, limit) {
   return items.slice(offset, offset + limit);
@@ -15,8 +17,6 @@ function commentsHandler(req, res) {
   const limit = query.has('limit') ? parseInt(query.get('limit')) : 10;
   const nextOffset = offset + limit;
   const previousOffset = offset - limit < 1 ? 0 : offset - limit;
-
-  const ITEMS = JSON.parse(fs.readFileSync(DATA));
 
   const meta = {
     limit: limit,
