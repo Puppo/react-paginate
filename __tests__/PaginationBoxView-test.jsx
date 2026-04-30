@@ -186,20 +186,44 @@ describe('Test clicks', () => {
     const pagination = await screen.findByRole('navigation');
     expect(pagination).toBeDefined();
 
-    const breakLinks = within(pagination).getAllByText('...', { exact: false }).map(el => el.closest('a')).filter(Boolean);
+    const breakLinks = within(pagination)
+      .getAllByText('...', { exact: false })
+      .map((el) => el.closest('a'))
+      .filter(Boolean);
     const rightBreakView = breakLinks[breakLinks.length - 1];
 
     fireEvent.click(rightBreakView);
-    expect(hasClass(within(pagination).getByText('6', { exact: false }).closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(
+        within(pagination).getByText('6', { exact: false }).closest('li'),
+        'selected'
+      )
+    ).toBe(true);
 
-    const breakLinks2 = within(pagination).getAllByText('...', { exact: false }).map(el => el.closest('a')).filter(Boolean);
+    const breakLinks2 = within(pagination)
+      .getAllByText('...', { exact: false })
+      .map((el) => el.closest('a'))
+      .filter(Boolean);
     const rightBreakView2 = breakLinks2[breakLinks2.length - 1];
     fireEvent.click(rightBreakView2);
-    expect(hasClass(within(pagination).getByText('11', { exact: false }).closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(
+        within(pagination).getByText('11', { exact: false }).closest('li'),
+        'selected'
+      )
+    ).toBe(true);
 
-    const breakLinks3 = within(pagination).getAllByText('...', { exact: false }).map(el => el.closest('a')).filter(Boolean);
+    const breakLinks3 = within(pagination)
+      .getAllByText('...', { exact: false })
+      .map((el) => el.closest('a'))
+      .filter(Boolean);
     fireEvent.click(breakLinks3[0]);
-    expect(hasClass(within(pagination).getByText('6', { exact: false }).closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(
+        within(pagination).getByText('6', { exact: false }).closest('li'),
+        'selected'
+      )
+    ).toBe(true);
   });
 
   it('test click on the right break view', async () => {
@@ -214,13 +238,26 @@ describe('Test clicks', () => {
     const pagination = await screen.findByRole('navigation');
     expect(pagination).toBeDefined();
 
-    const breakLinks = within(pagination).getAllByText('...', { exact: false }).map(el => el.closest('a')).filter(Boolean);
+    const breakLinks = within(pagination)
+      .getAllByText('...', { exact: false })
+      .map((el) => el.closest('a'))
+      .filter(Boolean);
 
     fireEvent.click(breakLinks[1]);
-    expect(hasClass(within(pagination).getByText('16', { exact: false }).closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(
+        within(pagination).getByText('16', { exact: false }).closest('li'),
+        'selected'
+      )
+    ).toBe(true);
 
     fireEvent.click(breakLinks[0]);
-    expect(hasClass(within(pagination).getByText('11', { exact: false }).closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(
+        within(pagination).getByText('11', { exact: false }).closest('li'),
+        'selected'
+      )
+    ).toBe(true);
   });
 });
 
@@ -241,11 +278,15 @@ describe('Test custom event listener', () => {
 
     fireEvent.mouseOver(next);
 
-    expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+    ).toBe(true);
 
     fireEvent.mouseOver(previous);
 
-    expect(hasClass(within(pagination).getByText('1').closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(within(pagination).getByText('1').closest('li'), 'selected')
+    ).toBe(true);
   });
 
   it('test custom listener on a page item', async () => {
@@ -262,7 +303,9 @@ describe('Test custom event listener', () => {
 
     fireEvent.mouseOver(pageItem.querySelector('a'));
 
-    expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+    expect(
+      hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+    ).toBe(true);
   });
 
   it('test custom listener on the left break view', async () => {
@@ -279,19 +322,22 @@ describe('Test custom event listener', () => {
     expect(pagination).toBeDefined();
 
     // Get break links - when initialPage=0, there are 2 breaks
-    const breakLinks = within(pagination).getAllByText('...', { exact: false }).map(el => el.closest('a')).filter(Boolean);
+    const breakLinks = within(pagination)
+      .getAllByText('...', { exact: false })
+      .map((el) => el.closest('a'))
+      .filter(Boolean);
     const rightBreak = breakLinks[breakLinks.length - 1];
 
     // Mouseover on right break from page 0 -> page 6
     fireEvent.mouseOver(rightBreak);
     let listitems = within(pagination).getAllByRole('listitem');
-    let selectedItem = listitems.find(li => hasClass(li, 'selected'));
+    let selectedItem = listitems.find((li) => hasClass(li, 'selected'));
     expect(selectedItem.textContent).toBe('6');
 
     // Mouseover on right break again -> page 11
     fireEvent.mouseOver(rightBreak);
     listitems = within(pagination).getAllByRole('listitem');
-    selectedItem = listitems.find(li => hasClass(li, 'selected'));
+    selectedItem = listitems.find((li) => hasClass(li, 'selected'));
     expect(selectedItem.textContent).toBe('6');
   });
 });
@@ -314,7 +360,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -357,7 +403,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -400,7 +446,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -443,7 +489,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -454,11 +500,23 @@ describe('Test pagination behaviour', () => {
     let rightBreakElementReached = false;
 
     nonNavListitems.forEach((element) => {
-      if (leftBreakElementReached === false && rightBreakElementReached === false && !hasClass(element, 'break')) {
+      if (
+        leftBreakElementReached === false &&
+        rightBreakElementReached === false &&
+        !hasClass(element, 'break')
+      ) {
         leftElements.push(element);
-      } else if (leftBreakElementReached === true && rightBreakElementReached === false && !hasClass(element, 'break')) {
+      } else if (
+        leftBreakElementReached === true &&
+        rightBreakElementReached === false &&
+        !hasClass(element, 'break')
+      ) {
         middleElements.push(element);
-      } else if (leftBreakElementReached === true && rightBreakElementReached === true && !hasClass(element, 'break')) {
+      } else if (
+        leftBreakElementReached === true &&
+        rightBreakElementReached === true &&
+        !hasClass(element, 'break')
+      ) {
         rightElements.push(element);
       } else if (breakElements.length === 0 && hasClass(element, 'break')) {
         breakElements.push(element);
@@ -494,7 +552,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -537,7 +595,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -580,7 +638,7 @@ describe('Test pagination behaviour', () => {
     const nextElement = listitems[listitems.length - 1];
 
     const nonNavListitems = listitems.filter(
-      li => !hasClass(li, 'previous') && !hasClass(li, 'next')
+      (li) => !hasClass(li, 'previous') && !hasClass(li, 'next')
     );
 
     let leftElements = [];
@@ -654,7 +712,9 @@ describe('Test pagination behaviour', () => {
     expect(getAttribute(lastPageLink, 'aria-label')).toBe('Goto page 3 foobar');
 
     const firstPageLink = listitems[1].querySelector('a');
-    expect(getAttribute(firstPageLink, 'aria-label')).toBe('Goto page 1 foobar');
+    expect(getAttribute(firstPageLink, 'aria-label')).toBe(
+      'Goto page 1 foobar'
+    );
 
     const selectedLink = within(linkedPagination).getByText('2').closest('a');
     expect(getAttribute(selectedLink, 'aria-label')).toBe('Current page');
@@ -776,7 +836,9 @@ describe('Test default props', () => {
       const nextItem = within(pagination).getByText('Next').closest('a');
       fireEvent.click(nextItem);
 
-      expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 
@@ -785,7 +847,9 @@ describe('Test default props', () => {
       render(<PaginationBoxView pageCount={DEFAULT_PAGE_COUNT} />);
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('1').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('1').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 
@@ -827,9 +891,14 @@ describe('Test default props', () => {
       const pageItem = within(pagination).getByText('2').closest('li');
       fireEvent.click(pageItem.querySelector('a'));
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
-      );
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
       expect(nonSelectedItems[0].className).toBe('');
       expect(hasClass(pageItem, 'selected')).toBe(true);
     });
@@ -847,9 +916,14 @@ describe('Test default props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
-      );
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
       expect(nonSelectedItems[0].querySelector('a').className).toBe('');
       expect(within(pagination).getByText('1').closest('a').className).toBe('');
     });
@@ -910,7 +984,9 @@ describe('Test default props', () => {
       expect(linkedPagination).toBeDefined();
 
       const lastLink = within(linkedPagination).getByText('Next').closest('a');
-      const firstLink = within(linkedPagination).getByText('Previous').closest('a');
+      const firstLink = within(linkedPagination)
+        .getByText('Previous')
+        .closest('a');
       const selectedLink = within(linkedPagination).getByText('1').closest('a');
 
       expect(lastLink.hasAttribute('href')).toBe(false);
@@ -931,11 +1007,23 @@ describe('Test default props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
-      );
-      expect(getAttribute(nonSelectedItems[0].querySelector('a'), 'aria-label')).toBe('Page 2');
-      expect(getAttribute(within(pagination).getByText('1').closest('a'), 'aria-label')).toBe('Page 1 is your current page');
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
+      expect(
+        getAttribute(nonSelectedItems[0].querySelector('a'), 'aria-label')
+      ).toBe('Page 2');
+      expect(
+        getAttribute(
+          within(pagination).getByText('1').closest('a'),
+          'aria-label'
+        )
+      ).toBe('Page 1 is your current page');
     });
   });
 
@@ -972,7 +1060,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(within(pagination).getByText('Custom previous label')).toBeDefined();
+      expect(
+        within(pagination).getByText('Custom previous label')
+      ).toBeDefined();
     });
 
     it('should use the nextLabel prop when defined', async () => {
@@ -1026,7 +1116,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('...').closest('li'), 'break-me')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('...').closest('li'), 'break-me')
+      ).toBe(true);
     });
 
     it('should use the breakLinkClassName prop when defined', async function () {
@@ -1038,7 +1130,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('...').closest('a'), 'break-link')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('...').closest('a'), 'break-link')
+      ).toBe(true);
     });
   });
 
@@ -1090,7 +1184,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('3').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('3').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 
@@ -1101,7 +1197,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('3').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('3').closest('li'), 'selected')
+      ).toBe(true);
     });
 
     it('should report a warning when using both initialPage and forcePage props', async () => {
@@ -1115,7 +1213,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('4').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('4').closest('li'), 'selected')
+      ).toBe(true);
       expect(console.warn).toHaveBeenCalledTimes(1);
       expect(console.warn).toHaveBeenLastCalledWith(
         '(react-paginate): Both initialPage (3) and forcePage (2) props are provided, which is discouraged.' +
@@ -1132,12 +1232,16 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      expect(hasClass(within(pagination).getByText('3').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('3').closest('li'), 'selected')
+      ).toBe(true);
 
       const pageItem = within(pagination).getByText('2').closest('li');
       fireEvent.click(pageItem.querySelector('a'));
 
-      expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+      ).toBe(true);
     });
 
     it('(observation) is not totally controlled when forcePage is provided, even when it is 0', async () => {
@@ -1147,12 +1251,16 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      expect(hasClass(within(pagination).getByText('1').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('1').closest('li'), 'selected')
+      ).toBe(true);
 
       const pageItem = within(pagination).getByText('2').closest('li');
       fireEvent.click(pageItem.querySelector('a'));
 
-      expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 
@@ -1226,9 +1334,14 @@ describe('Test custom props', () => {
       const pageItem = within(pagination).getByText('2').closest('li');
       fireEvent.click(pageItem.querySelector('a'));
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
-      );
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
       expect(nonSelectedItems[0].className).toBe('page-item');
       expect(pageItem.className).toBe('page-item selected');
     });
@@ -1267,9 +1380,14 @@ describe('Test custom props', () => {
       const pageItem = within(pagination).getByText('2').closest('li');
       fireEvent.click(pageItem.querySelector('a'));
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
-      );
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
       expect(nonSelectedItems[0].className).toBe('page-item');
       expect(pageItem.className).toBe('page-item active-page-item');
     });
@@ -1288,11 +1406,20 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
+      expect(nonSelectedItems[0].querySelector('a').className).toBe(
+        'page-item-link'
       );
-      expect(nonSelectedItems[0].querySelector('a').className).toBe('page-item-link');
-      expect(within(pagination).getByText('1').closest('a').className).toBe('page-item-link');
+      expect(within(pagination).getByText('1').closest('a').className).toBe(
+        'page-item-link'
+      );
     });
 
     it('should use the activeLinkClassName prop when defined', async () => {
@@ -1304,7 +1431,9 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(within(pagination).getByText('1').closest('a').className).toBe('active-page-item-link');
+      expect(within(pagination).getByText('1').closest('a').className).toBe(
+        'active-page-item-link'
+      );
     });
 
     it('should use the activeLinkClassName prop without overriding the defined pageLinkClassName', async () => {
@@ -1320,11 +1449,20 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
+      expect(nonSelectedItems[0].querySelector('a').className).toBe(
+        'page-item-link'
       );
-      expect(nonSelectedItems[0].querySelector('a').className).toBe('page-item-link');
-      expect(within(pagination).getByText('1').closest('a').className).toBe('page-item-link active-page-item-link');
+      expect(within(pagination).getByText('1').closest('a').className).toBe(
+        'page-item-link active-page-item-link'
+      );
     });
   });
 
@@ -1441,7 +1579,9 @@ describe('Test custom props', () => {
       const firstLink = within(paginationFirst).getByText('Previous');
       const lastLink = within(paginationFirst).getByText('Next');
 
-      expect(firstLink.className).toBe('custom-previous-link-classname custom-disabled-link-classname');
+      expect(firstLink.className).toBe(
+        'custom-previous-link-classname custom-disabled-link-classname'
+      );
       expect(lastLink.className).toBe('custom-next-link-classname');
     });
 
@@ -1462,7 +1602,9 @@ describe('Test custom props', () => {
       const lastLink = within(paginationFirst).getByText('Next');
 
       expect(firstLink.className).toBe('custom-previous-link-classname');
-      expect(lastLink.className).toBe('custom-next-link-classname custom-disabled-link-classname');
+      expect(lastLink.className).toBe(
+        'custom-next-link-classname custom-disabled-link-classname'
+      );
     });
   });
 
@@ -1575,9 +1717,12 @@ describe('Test custom props', () => {
       expect(paginationLast).toBeDefined();
 
       const listitemsLast = within(paginationLast).getAllByRole('listitem');
-      const lastLinkLast = listitemsLast[listitemsLast.length - 1].querySelector('a');
+      const lastLinkLast =
+        listitemsLast[listitemsLast.length - 1].querySelector('a');
       const firstLinkLast = listitemsLast[0].querySelector('a');
-      const selectedLinkLast = within(paginationLast).getByText('10').closest('a');
+      const selectedLinkLast = within(paginationLast)
+        .getByText('10')
+        .closest('a');
 
       expect(getAttribute(lastLinkLast, 'href')).toBe(null);
       expect(getAttribute(firstLinkLast, 'href')).toBe('/page/9');
@@ -1618,9 +1763,12 @@ describe('Test custom props', () => {
       expect(paginationLast).toBeDefined();
 
       const listitemsLast = within(paginationLast).getAllByRole('listitem');
-      const lastLinkLast = listitemsLast[listitemsLast.length - 1].querySelector('a');
+      const lastLinkLast =
+        listitemsLast[listitemsLast.length - 1].querySelector('a');
       const firstLinkLast = listitemsLast[0].querySelector('a');
-      const selectedLinkLast = within(paginationLast).getByText('10').closest('a');
+      const selectedLinkLast = within(paginationLast)
+        .getByText('10')
+        .closest('a');
 
       expect(getAttribute(lastLinkLast, 'href')).toBe(null);
       expect(getAttribute(firstLinkLast, 'href')).toBe('/page/9');
@@ -1642,11 +1790,23 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const nonSelectedItems = within(pagination).getAllByRole('listitem').filter(
-        li => !hasClass(li, 'selected') && !hasClass(li, 'prev') && !hasClass(li, 'next')
-      );
-      expect(getAttribute(nonSelectedItems[0].querySelector('a'), 'aria-label')).toBe('Page 2 can be clicked');
-      expect(getAttribute(within(pagination).getByText('1').closest('a'), 'aria-label')).toBe('Page 1 is your current page');
+      const nonSelectedItems = within(pagination)
+        .getAllByRole('listitem')
+        .filter(
+          (li) =>
+            !hasClass(li, 'selected') &&
+            !hasClass(li, 'prev') &&
+            !hasClass(li, 'next')
+        );
+      expect(
+        getAttribute(nonSelectedItems[0].querySelector('a'), 'aria-label')
+      ).toBe('Page 2 can be clicked');
+      expect(
+        getAttribute(
+          within(pagination).getByText('1').closest('a'),
+          'aria-label'
+        )
+      ).toBe('Page 1 is your current page');
       expect(console.warn).toHaveBeenCalledTimes(1);
       expect(console.warn).toHaveBeenLastCalledWith(
         'DEPRECATED (react-paginate): The extraAriaContext prop is deprecated. You should now use the ariaLabelBuilder instead.'
@@ -1721,7 +1881,9 @@ describe('Test custom props', () => {
     const lastLink = allLinks[allLinks.length - 1];
 
     expect(getAttribute(lastLink, 'aria-label')).toBe('Go to the next page');
-    expect(getAttribute(firstLink, 'aria-label')).toBe('Go to the previous page');
+    expect(getAttribute(firstLink, 'aria-label')).toBe(
+      'Go to the previous page'
+    );
   });
 
   describe('render custom page labels if defined', () => {
@@ -1746,7 +1908,12 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      expect(hasClass(within(pagination).getByText('Item 1').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(
+          within(pagination).getByText('Item 1').closest('li'),
+          'selected'
+        )
+      ).toBe(true);
     });
   });
   describe('prevPageRel/nextPageRel/selectedPageRel', () => {
@@ -1787,7 +1954,9 @@ describe('Test custom props', () => {
       const secondLink = listitems[1].querySelector('a');
       const fourthLink = listitems[3].querySelector('a');
 
-      expect(getAttribute(thirdLinkAfterClick, 'rel')).toBe('custom-selected-rel');
+      expect(getAttribute(thirdLinkAfterClick, 'rel')).toBe(
+        'custom-selected-rel'
+      );
       expect(getAttribute(secondLink, 'rel')).toBe('custom-prev-rel');
       expect(getAttribute(fourthLink, 'rel')).toBe('custom-next-rel');
     });
@@ -1813,7 +1982,9 @@ describe('Test custom props', () => {
 
       expect(getAttribute(secondLink, 'rel')).toBe(null);
       expect(getAttribute(thirdLinkAfterClick, 'rel')).toBe(null);
-      expect(getAttribute(within(pagination).getByText('1').closest('a'), 'rel')).toBe(null);
+      expect(
+        getAttribute(within(pagination).getByText('1').closest('a'), 'rel')
+      ).toBe(null);
       expect(getAttribute(fourthLink, 'rel')).toBe(null);
     });
     it('should not render prevPageRel and nextPageRel if pageCount is 1', async function () {
@@ -1858,7 +2029,8 @@ describe('Test custom props', () => {
       fireEvent.click(secondLastLink);
 
       const lastLink = within(pagination).getByText('Next');
-      const secondLastLinkAfterClick = listitems[listitems.length - 2].querySelector('a');
+      const secondLastLinkAfterClick =
+        listitems[listitems.length - 2].querySelector('a');
       const thirdLastLink = listitems[listitems.length - 3].querySelector('a');
 
       expect(getAttribute(lastLink, 'aria-label')).toBe('Next page');
@@ -1906,7 +2078,8 @@ describe('Test custom props', () => {
 
       const secondLastLi = listitems[listitems.length - 2];
       const secondLastLinkAfterClick = secondLastLi.querySelector('a');
-      const thirdLastLinkAfterClick = listitems[listitems.length - 3].querySelector('a');
+      const thirdLastLinkAfterClick =
+        listitems[listitems.length - 3].querySelector('a');
       const fourthLastLi = listitems[listitems.length - 4];
 
       expect(getAttribute(secondLastLinkAfterClick, 'rel')).toBe('next');
@@ -1934,32 +2107,45 @@ describe('Test custom props', () => {
 
       fireEvent.click(next);
 
-      const selectedLinks = within(pagination).getAllByRole('button').filter(
-        button => hasClass(button.closest('li'), 'selected')
-      );
+      const selectedLinks = within(pagination)
+        .getAllByRole('button')
+        .filter((button) => hasClass(button.closest('li'), 'selected'));
       expect(selectedLinks.length).toBe(1);
-      expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+      ).toBe(true);
 
       // Click to go to page 8.
       for (let i = 1; i < 7; i++) {
         const nextButton = within(pagination).getByText('Next').closest('a');
         fireEvent.click(nextButton);
 
-        const selectedLinksAfterClick = within(pagination).getAllByRole('button').filter(
-          button => hasClass(button.closest('li'), 'selected')
-        );
+        const selectedLinksAfterClick = within(pagination)
+          .getAllByRole('button')
+          .filter((button) => hasClass(button.closest('li'), 'selected'));
         expect(selectedLinksAfterClick.length).toBe(1);
-        expect(hasClass(within(pagination).getByText(`${2 + i}`).closest('li'), 'selected')).toBe(true);
+        expect(
+          hasClass(
+            within(pagination)
+              .getByText(`${2 + i}`)
+              .closest('li'),
+            'selected'
+          )
+        ).toBe(true);
       }
-      expect(hasClass(within(pagination).getByText('8').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('8').closest('li'), 'selected')
+      ).toBe(true);
 
       fireEvent.click(previous);
 
-      const selectedLinksAfterPrev = within(pagination).getAllByRole('button').filter(
-        button => hasClass(button.closest('li'), 'selected')
-      );
+      const selectedLinksAfterPrev = within(pagination)
+        .getAllByRole('button')
+        .filter((button) => hasClass(button.closest('li'), 'selected'));
       expect(selectedLinksAfterPrev.length).toBe(1);
-      expect(hasClass(within(pagination).getByText('7').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('7').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 
@@ -1975,26 +2161,34 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const breakLinks = within(pagination).queryAllByText('...', { exact: false });
+      const breakLinks = within(pagination).queryAllByText('...', {
+        exact: false,
+      });
       expect(breakLinks.length).toBe(0);
 
-      const selectedLinks = within(pagination).getAllByRole('button').filter(
-        button => hasClass(button.closest('li'), 'selected')
-      );
+      const selectedLinks = within(pagination)
+        .getAllByRole('button')
+        .filter((button) => hasClass(button.closest('li'), 'selected'));
       expect(selectedLinks.length).toBe(1);
-      expect(hasClass(within(pagination).getByText('1').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('1').closest('li'), 'selected')
+      ).toBe(true);
 
       const nextLink = within(pagination).getByText('Next').closest('a');
       fireEvent.click(nextLink);
 
-      const breakLinksAfterClick = within(pagination).queryAllByText('...', { exact: false });
+      const breakLinksAfterClick = within(pagination).queryAllByText('...', {
+        exact: false,
+      });
       expect(breakLinksAfterClick.length).toBe(0);
 
-      const selectedLinksAfterClick = within(pagination).getAllByRole('button').filter(
-        button => hasClass(button.closest('li'), 'selected')
-      );
+      const selectedLinksAfterClick = within(pagination)
+        .getAllByRole('button')
+        .filter((button) => hasClass(button.closest('li'), 'selected'));
       expect(selectedLinksAfterClick.length).toBe(1);
-      expect(hasClass(within(pagination).getByText('2').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('2').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 
@@ -2013,7 +2207,9 @@ describe('Test custom props', () => {
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
 
-      const breakItems = within(pagination).getAllByText('...', { exact: false }).filter(el => el.closest('a'));
+      const breakItems = within(pagination)
+        .getAllByText('...', { exact: false })
+        .filter((el) => el.closest('a'));
       const breakItem = breakItems[0].closest('a');
       fireEvent.click(breakItem);
 
@@ -2030,7 +2226,9 @@ describe('Test custom props', () => {
       );
 
       // page should not change because onClick returned false
-      expect(hasClass(within(pagination).getByText('11').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('11').closest('li'), 'selected')
+      ).toBe(true);
     });
 
     it('should use the return value from onClick to change page', async () => {
@@ -2046,13 +2244,19 @@ describe('Test custom props', () => {
       );
       const pagination = await screen.findByRole('navigation');
       expect(pagination).toBeDefined();
-      expect(hasClass(within(pagination).getByText('11').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('11').closest('li'), 'selected')
+      ).toBe(true);
 
-      const breakItems = within(pagination).getAllByText('...', { exact: false }).filter(el => el.closest('a'));
+      const breakItems = within(pagination)
+        .getAllByText('...', { exact: false })
+        .filter((el) => el.closest('a'));
       const breakItem = breakItems[0].closest('a');
       fireEvent.click(breakItem);
 
-      expect(hasClass(within(pagination).getByText('6').closest('li'), 'selected')).toBe(true);
+      expect(
+        hasClass(within(pagination).getByText('6').closest('li'), 'selected')
+      ).toBe(true);
     });
   });
 });

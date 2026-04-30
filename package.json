@@ -54,7 +54,7 @@
     "test:watch": "vitest --watch",
     "build": "vite build",
     "demo:build": "vite build --config demo/vite.config.js",
-    "demo": "vite --config demo/vite.config.js",
+    "start": "vite --config demo/vite.config.js",
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

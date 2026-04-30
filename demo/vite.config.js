@@ -12,7 +12,9 @@ function getPaginatedItems(items, offset, limit) {
 }
 
 function commentsHandler(req, res) {
-  const query = new URLSearchParams(req.url.includes('?') ? req.url.slice(req.url.indexOf('?') + 1) : '');
+  const query = new URLSearchParams(
+    req.url.includes('?') ? req.url.slice(req.url.indexOf('?') + 1) : ''
+  );
   const offset = query.has('offset') ? parseInt(query.get('offset')) : 0;
   const limit = query.has('limit') ? parseInt(query.get('limit')) : 10;
   const nextOffset = offset + limit;
