@@ -23,6 +23,7 @@
   "author": {
     "name": "Adèle Delamarche"
   },
+  "type": "module",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AdeleD/react-paginate/issues"
@@ -35,11 +36,13 @@
     "react": "^16 || ^17 || ^18 || ^19"
   },
   "devDependencies": {
+    "@eslint/js": "^9",
     "@testing-library/react": "^16",
     "@vitejs/plugin-react": "^6",
     "core-js": "^3",
-    "eslint": "^7",
-    "eslint-plugin-react": "^7",
+    "eslint": "^9",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17",
     "husky": "^9",
     "jsdom": "^29",
     "prettier": "^3.8",

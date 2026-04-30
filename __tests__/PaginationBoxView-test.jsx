@@ -1,7 +1,5 @@
-/* eslint-disable testing-library/prefer-screen-queries */
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import 'core-js/stable';
-import React from 'react';
-import { render, screen, fireEvent, within } from '@testing-library/react';
 import PaginationBoxView from '../react_components/PaginationBoxView';
 
 const DEFAULT_PAGE_COUNT = 10;
